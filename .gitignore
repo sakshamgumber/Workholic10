@@ -1,2 +1,3 @@
-.instance
-.env
+instance/
+__pycache__/
+.env/

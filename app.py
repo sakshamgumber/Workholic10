@@ -4,10 +4,10 @@ from datetime import datetime
 import bcrypt
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///worklogindb.db'
-app.config['SQLALCHEMY_BINDS'] = {"two" : "sqlite:///contlogindb.db",
-                                  "three" : "sqlite:///jobsdb.db",
-                                  "four" : "sqlite:///fill_formdb.db"}
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://workholic_user:ets8ieqpAp5sXvEHbeAoGfIvzvBzosST@dpg-ct712lhu0jms739crojg-a.oregon-postgres.render.com/formdb'
+app.config['SQLALCHEMY_BINDS'] = {"two" : "postgresql://workholic_user:ets8ieqpAp5sXvEHbeAoGfIvzvBzosST@dpg-ct712lhu0jms739crojg-a.oregon-postgres.render.com/conslogindb",
+                                  "three" : "postgresql://workholic_user:ets8ieqpAp5sXvEHbeAoGfIvzvBzosST@dpg-ct712lhu0jms739crojg-a.oregon-postgres.render.com/jobsdb",
+                                  "four" : "postgresql://workholic_user:ets8ieqpAp5sXvEHbeAoGfIvzvBzosST@dpg-ct712lhu0jms739crojg-a.oregon-postgres.render.com/mydatabase"}
 db = SQLAlchemy(app)
 app.secret_key = 'secret_key'
 
@@ -206,4 +206,4 @@ def index():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run()

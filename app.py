@@ -2,12 +2,15 @@ from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import bcrypt
-
+import os
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://workholic_user:ets8ieqpAp5sXvEHbeAoGfIvzvBzosST@dpg-ct712lhu0jms739crojg-a.oregon-postgres.render.com/formdb'
-app.config['SQLALCHEMY_BINDS'] = {"two" : "postgresql://workholic_user:ets8ieqpAp5sXvEHbeAoGfIvzvBzosST@dpg-ct712lhu0jms739crojg-a.oregon-postgres.render.com/conslogindb",
-                                  "three" : "postgresql://workholic_user:ets8ieqpAp5sXvEHbeAoGfIvzvBzosST@dpg-ct712lhu0jms739crojg-a.oregon-postgres.render.com/jobsdb",
-                                  "four" : "postgresql://workholic_user:ets8ieqpAp5sXvEHbeAoGfIvzvBzosST@dpg-ct712lhu0jms739crojg-a.oregon-postgres.render.com/mydatabase"}
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASEURL')
+app.config['SQLALCHEMY_BINDS'] = {
+    "two": os.environ.get('DATABASEURL2'),
+    "three": os.environ.get('DATABASEURL3'),
+    "four": os.environ.get('DATABASEURL4')
+}
+
 db = SQLAlchemy(app)
 app.secret_key = 'secret_key'
 
